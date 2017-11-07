@@ -1,40 +1,58 @@
+var inputElementArr = [];
+
+
+
+
+
 $(document).ready(initiateApp);
 
 function initiateApp() {
-    $('.number').click(numberInput);
-    $('.operator').click(operatorInput);
-    $('.dot').click(dotInput);
-    $('.equal').click(equalInput);
-    $('.delete').click(deletePartial);
-    $('.deleteEverything').click(deleteAll);
+    $('.number').click(handleNumInput);
+    $('.operator').click(handleOperatorInput);
+    $('.dot').click(handleDotInput);
+    $('.equal').click(handleEqualInput);
+    $('.delete').click(handleDeletePartial);
+    $('.deleteEverything').click(handleDeleteAll);
+    handleAllInput(inputElementArr);
 }
 
+function display(){
 
+}
 
-function numberInput() {
+function handleAllInput(arr) {
+    for(var i=0; i< arr.length; i++){
+        if(!isNaN(arr[i])){
+
+        }
+    }
+}
+
+function handleNumInput() {
     var numInput = $(this).text();
+    inputElementArr.push(numInput);
 }
 
-function operatorInput() {
+function handleOperatorInput() {
     var opInput = $(this).text();
-
+    inputElementArr.push(opInput);
 }
 
-function dotInput() {
+function handleDotInput() {
     var dot = $(this).text();
 
 }
 
-function equalInput() {
+function handleEqualInput() {
     var equalSign = $(this).text();
 
 }
 
-function deletePartial() {
+function handleDeletePartial() {
     var del = $(this).text();
 
 }
 
-function deleteAll() {
+function handleDeleteAll() {
     var deleteAll = $(this).text();
 }

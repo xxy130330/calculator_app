@@ -50,6 +50,7 @@ html{
 
 .tall{
     height:200%;
+    float: right;
 }
 
 .column{

@@ -1,0 +1,53 @@
+.container{
+    height:66vh;
+    width:30vw;
+    border: 2px solid black;
+    display: inline-block;
+    padding:0;
+}
+
+#displayArea{
+    width: 100%;
+    height: 30%;
+    background-color: yellow;
+}
+
+#buttonArea{
+    width: 100%;
+    height:70%;
+    background-color: green;
+}
+
+.row{
+    height:20%;
+    width:100%;
+    margin: 0;
+}
+
+.operator,
+.number,
+.dot,
+.deleteEverything,
+.delete{
+    width:24%;
+    height:100%;
+}
+
+.equal{
+    height:200%;
+    width:24%;
+}
+
+.row > button{
+    vertical-align: top;
+}
+
+#row4{
+    margin-right: 0;
+}
+
+
+
+
+
+

@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Calculator</title>
 </head>
 <body>
     <div class="container">
         <div id="displayArea"></div>
-        <div id="row1">
-            <button class="operator">/</button>
-            <button class="operator">*</button>
-            <button class="operator">-</button>
-            <button class="operator">+</button>
-        </div>
-        <div id="row2">
-            <button class="number">7</button>
-            <button class="number">8</button>
-            <button class="number">9</button>
-            <button class="dot">.</button>
-        </div>
-        <div id="row3">
-            <button class="number">4</button>
-            <button class="number">5</button>
-            <button class="number">6</button>
-            <button class="operator">%</button>
-        </div>
-        <div id="row4">
-            <button class="number">1</button>
-            <button class="number">2</button>
-            <button class="number">3</button>
-        </div>
-        <div id="row5">
-            <button class="delete">C</button>
-            <button class="number">0</button>
-            <button class="deleteEverything">CE</button>
+        <div id="buttonArea">
+            <div class="row">
+                <button class="operator">/</button>
+                <button class="operator">*</button>
+                <button class="operator">-</button>
+                <button class="operator">+</button>
+            </div>
+            <div class="row">
+                <button class="number">7</button>
+                <button class="number">8</button>
+                <button class="number">9</button>
+                <button class="dot">.</button>
+            </div>
+            <div class="row">
+                <button class="number">4</button>
+                <button class="number">5</button>
+                <button class="number">6</button>
+                <button class="operator">%</button>
+            </div>
+            <div class="row" id="row4">
+                <button class="number">1</button>
+                <button class="number">2</button>
+                <button class="number">3</button>
+                <button class="equal">=</button>
+            </div>
+            <div class="row" id="row5">
+                <button class="delete">C</button>
+                <button class="number">0</button>
+                <button class="deleteEverything">CE</button>
+            </div>
+            <div>
+
+            </div>
         </div>
     </div>
 </body>

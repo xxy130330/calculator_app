@@ -1,9 +1,13 @@
-.container{
-    height:66vh;
-    width:30vw;
-    border: 2px solid black;
+html{
+    font-size: 1.5vmin;
+}
+.container {
+    height: 66vh;
+    width: 25vw;
+    border: .5vmin solid black;
     display: inline-block;
-    padding:0;
+    padding: 0;
+    margin: auto;
 }
 
 #displayArea{
@@ -29,17 +33,23 @@
 .dot,
 .deleteEverything,
 .delete{
-    width:24%;
+    width:25%;
     height:100%;
 }
 
 .equal{
     height:200%;
-    width:24%;
 }
 
 .row > button{
     vertical-align: top;
+}
+.row{
+    font-size: 0;
+}
+button{
+    font-size: 2rem;
+    width: 25%;
 }
 
 #row4{

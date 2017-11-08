@@ -23,10 +23,17 @@ function handleAllInputConcat(arr) {
     }
     if(arr.indexOf('.') !== -1) {
         var dotLocation = arr.indexOf('.');
+        if(dotLocation !== 0) {
             arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
             arr.splice(dotLocation, 1);
-            if(!isNaN(arr[dotLocation])){
+            if (!isNaN(arr[dotLocation])) {
                 arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
+            }
+        }else {
+            if (!isNaN(arr[dotLocation+1]) || arr[dotLocation+1] !==undefined) {
+                arr[dotLocation] = '' + arr[dotLocation] + arr[dotLocation + 1];
+                arr.splice(dotLocation + 1, 1);
+            }
         }
     }
 }

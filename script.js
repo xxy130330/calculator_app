@@ -12,6 +12,32 @@ function initiateApp() {
     handleAllInputConcat(inputElementArr);
 }
 
+function runCalculation(arr) {
+    for (var i =0; i<arr.length; i++){
+        if(arr[i] == '*' || arr[i] == '/'){
+            if(arr[i] == '*'){
+                arr[i-1] = parseFloat(arr[i-1]) * parseFloat(arr[i+1]);
+            }else{
+                arr[i-1]=parseFloat(arr[i-1]) / parseFloat(arr[i+1]);
+            }
+            arr.splice(i, 2);
+            i=i-2;
+        }
+    }
+    for (var i = 0; i<arr.length; i++){
+        if(arr[i] == '+' || arr[i] == '-') {
+            if(arr[i] == '+'){
+                arr[i-1] = parseFloat(arr[i-1]) + parseFloat(arr[i+1]);
+            }else{
+                arr[i-1]=parseFloat(arr[i-1]) - parseFloat(arr[i+1]);
+            }
+            arr.splice(i, 2);
+            i=i-2;
+        }
+    }
+    $('#result').append(arr[0]);
+    return arr[0];
+}
 
 function handleAllInputConcat(arr) {
     for(var i=0; i<arr.length; i++){
@@ -69,9 +95,8 @@ function handleDotInput() {
 }
 
 function handleEqualInput() {
-    var equalSign = $(this).text();
     if(checkFirstElementAtInputArr()) {
-        inputElementArr.push(equalSign);
+        runCalculation(inputElementArr);
     }
 }
 
@@ -81,6 +106,7 @@ function handleDeletePartial() {
 
 function handleDeleteAll() {
     $('#expression').empty();
+    $('#result').empty();
     inputElementArr=[];
 }
 

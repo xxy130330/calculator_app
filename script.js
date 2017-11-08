@@ -62,6 +62,13 @@ function handleAllInputConcat(arr) {
             }
         }
     }
+    if(arr.indexOf('%') !== -1) {
+        var percentageLocation = arr.indexOf('%');
+        if(arr[percentageLocation-1] !==undefined){
+            arr[percentageLocation-1] = arr[percentageLocation-1]/100;
+            arr.splice(percentageLocation, 1);
+        }
+    }
 }
 
 function handleNumInput() {
@@ -94,6 +101,7 @@ function handleDotInput() {
     handleAllInputConcat(inputElementArr);
 }
 
+
 function handleEqualInput() {
     if(checkFirstElementAtInputArr()) {
         runCalculation(inputElementArr);
@@ -101,7 +109,9 @@ function handleEqualInput() {
 }
 
 function handleDeletePartial() {
-    $('#expression button').last().remove();
+    var temp = inputElementArr[inputElementArr.length-1];
+    inputElementArr.pop();
+
 }
 
 function handleDeleteAll() {

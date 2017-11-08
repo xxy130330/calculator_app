@@ -13,6 +13,7 @@ function initiateApp() {
 }
 
 function runCalculation(arr) {
+    arr = arr.filter(Boolean);
     for (var i =0; i<arr.length; i++){
         if(arr[i] == '*' || arr[i] == '/'){
             if(arr[i] == '*'){
@@ -109,9 +110,20 @@ function handleEqualInput() {
 }
 
 function handleDeletePartial() {
-    var temp = inputElementArr[inputElementArr.length-1];
-    inputElementArr.pop();
-
+    var dom = $('#expression').text();
+    if (dom[dom.length - 1] !== '%') {
+        var arrLastElement = inputElementArr[inputElementArr.length - 1];
+        inputElementArr.splice(inputElementArr.length - 1, 1);
+        var lastIndexOfLastElement = arrLastElement.length - 1;
+        var subStrOfArr = arrLastElement.substr(0, lastIndexOfLastElement);
+        inputElementArr.push(subStrOfArr);
+        var lastIndex = dom.length - 1;
+        var tempStr = dom.substr(0, lastIndex);
+        $('#expression').empty();
+        $('#expression').append(tempStr);
+    }else{
+        
+    }
 }
 
 function handleDeleteAll() {

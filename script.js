@@ -9,16 +9,24 @@ function initiateApp() {
     $('.equal').click(handleEqualInput);
     $('.delete').click(handleDeletePartial);
     $('.deleteEverything').click(handleDeleteAll);
-    handleAllInput(inputElementArr);
+    handleAllInputConcat(inputElementArr);
 }
 
 
-function handleAllInput(arr) {
+function handleAllInputConcat(arr) {
     for(var i=0; i<arr.length; i++){
-        if(!isNaN(arr[i]) && !isNaN(arr[i+1])){
+        if(!isNaN(arr[i]) && !isNaN(arr[i+1]) && arr[i] !== '.' && arr[i+1] !== '.'){
             arr[i] = '' + arr[i] + arr[i+1];
             arr.splice(i+1,1);
             i--;
+        }
+    }
+    if(arr.indexOf('.') !== -1) {
+        var dotLocation = arr.indexOf('.');
+            arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
+            arr.splice(dotLocation, 1);
+            if(!isNaN(arr[dotLocation])){
+                arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
         }
     }
 }
@@ -27,15 +35,22 @@ function handleNumInput() {
     var numInput = $(this).text();
     $('#expression').append(numInput);
     inputElementArr.push(numInput);
-    handleAllInput(inputElementArr);
+    handleAllInputConcat(inputElementArr);
 }
 
 function handleOperatorInput() {
     var opInput = $(this).text();
     $('#expression').append(opInput);
-    if(checkFirstElementAtInputArr()) {
-        inputElementArr.push(opInput);
-        handleAllInput(inputElementArr);
+    if(checkFirstElementAtInputArr() || opInput === "-") {
+        var temp = inputElementArr[inputElementArr.length-1];
+        if(!isNaN(temp)){
+            inputElementArr.push(opInput);
+            handleAllInputConcat(inputElementArr);
+        }else{
+            inputElementArr.splice(inputElementArr.length-1, 1);
+            inputElementArr.push(opInput);
+            handleAllInputConcat(inputElementArr);
+        }
     }
 }
 
@@ -43,7 +58,7 @@ function handleDotInput() {
     var dot = $(this).text();
     $('#expression').append(dot);
     inputElementArr.push(dot);
-    handleAllInput(inputElementArr);
+    handleAllInputConcat(inputElementArr);
 }
 
 function handleEqualInput() {
@@ -63,7 +78,7 @@ function handleDeleteAll() {
 }
 
 function checkFirstElementAtInputArr() {
-    if(inputElementArr[0] == null){
+    if(inputElementArr[0] !== undefined){
         return true;
     }
 }

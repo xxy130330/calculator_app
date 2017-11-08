@@ -112,18 +112,26 @@ function handleEqualInput() {
 function handleDeletePartial() {
     var dom = $('#expression').text();
     if (dom[dom.length - 1] !== '%') {
+        deleteLastDigit(inputElementArr, dom);
+    }else{
         var arrLastElement = inputElementArr[inputElementArr.length - 1];
         inputElementArr.splice(inputElementArr.length - 1, 1);
-        var lastIndexOfLastElement = arrLastElement.length - 1;
-        var subStrOfArr = arrLastElement.substr(0, lastIndexOfLastElement);
-        inputElementArr.push(subStrOfArr);
-        var lastIndex = dom.length - 1;
-        var tempStr = dom.substr(0, lastIndex);
-        $('#expression').empty();
-        $('#expression').append(tempStr);
-    }else{
-        
+        var percentageNum = arrLastElement*100 + '%';
+        inputElementArr.push(percentageNum);
+        deleteLastDigit(inputElementArr, dom);
     }
+}
+
+function deleteLastDigit(arr,domArr) {
+    var arrLastElement = arr[arr.length - 1];
+    arr.splice(arr.length - 1, 1);
+    var lastIndexOfLastElement = arrLastElement.length - 1;
+    var subStrOfArr = arrLastElement.substr(0, lastIndexOfLastElement);
+    arr.push(subStrOfArr);
+    var lastIndex = domArr.length - 1;
+    var tempStr = domArr.substr(0, lastIndex);
+    $('#expression').empty();
+    $('#expression').append(tempStr);
 }
 
 function handleDeleteAll() {

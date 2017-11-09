@@ -148,7 +148,7 @@ function handleEqualInput() {
     $('#expression').append(equal);
     if (flag) {
         if (equalCounter !== 0) {
-            runCalculation(multiEqual(inputElementArr));
+            runCalculation(multiEqualNotAtBeginning(inputElementArr));
         } else if (checkFirstElementAtInputArr()) {
             runCalculation(inputElementArr);
             equalCounter++;
@@ -157,7 +157,7 @@ function handleEqualInput() {
 }
 
 
-function multiEqual(arr) {
+function multiEqualNotAtBeginning(arr) {
     var currentResult = $('#result').text();
     var newResultArr = [];
     newResultArr.push(currentResult);
@@ -170,15 +170,21 @@ function multiEqual(arr) {
 
 
 function handleDeletePartial() {
+    inputElementArr = inputElementArr.filter(Boolean);
     var dom = $('#expression').text();
-    if (dom[dom.length - 1] !== '%') {
-        deleteLastDigit(inputElementArr, dom);
-    }else{
-        var arrLastElement = inputElementArr[inputElementArr.length - 1];
-        inputElementArr.splice(inputElementArr.length - 1, 1);
-        var percentageNum = arrLastElement*100 + '%';
-        inputElementArr.push(percentageNum);
-        deleteLastDigit(inputElementArr, dom);
+    if (inputElementArr.length === 1) {
+        handleDeleteAll();
+    }
+    else {
+        if (dom[dom.length - 1] !== '%') {
+            deleteLastDigit(inputElementArr, dom);
+        } else {
+            var arrLastElement = inputElementArr[inputElementArr.length - 1];
+            inputElementArr.splice(inputElementArr.length - 1, 1);
+            var percentageNum = arrLastElement * 100 + '%';
+            inputElementArr.push(percentageNum);
+            deleteLastDigit(inputElementArr, dom);
+        }
     }
 }
 

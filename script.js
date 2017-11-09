@@ -98,8 +98,12 @@ function handleOperatorInput() {
 function handleDotInput() {
     var dot = $(this).text();
     $('#expression').append(dot);
+     var lastElement = inputElementArr[inputElementArr.length - 1];
+     var lastCharOfLastElement = lastElement[lastElement.length-1];
+    if (lastCharOfLastElement !== '.'){
     inputElementArr.push(dot);
     handleAllInputConcat(inputElementArr);
+    }
 }
 
 

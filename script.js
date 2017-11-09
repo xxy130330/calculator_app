@@ -1,4 +1,6 @@
 var inputElementArr = [];
+var equalCounter = 0;
+var flag = true;
 
 $(document).ready(initiateApp);
 
@@ -70,6 +72,11 @@ function handleAllInputConcat(arr) {
             arr.splice(percentageLocation, 1);
         }
     }
+    if(arr.indexOf('0') !== -1 && arr[arr.indexOf('0')-1] === '/'){
+        flag = false;
+        $('#result').text('ERROR!!!');
+        return;
+    }
 }
 
 function handleNumInput() {
@@ -108,9 +115,27 @@ function handleDotInput() {
 
 
 function handleEqualInput() {
-    if(checkFirstElementAtInputArr()) {
-        runCalculation(inputElementArr);
+    var equal = $(this).text();
+    $('#expression').append(equal);
+    if (flag) {
+        if (equalCounter !== 0) {
+            runCalculation(multiEqual(inputElementArr));
+        } else if (checkFirstElementAtInputArr()) {
+            runCalculation(inputElementArr);
+            equalCounter++;
+        }
     }
+}
+
+function multiEqual(arr) {
+    var currentResult = $('#result').text();
+    var newResultArr = [];
+    newResultArr.push(currentResult);
+    newResultArr.push(arr[arr.length-2]);
+    newResultArr.push(arr[arr.length-1]);
+    equalCounter++;
+    $('#result').empty();
+    return newResultArr;
 }
 
 function handleDeletePartial() {
@@ -142,6 +167,8 @@ function handleDeleteAll() {
     $('#expression').empty();
     $('#result').empty();
     inputElementArr=[];
+    equalCounter = 0;
+    flag = true;
 }
 
 function checkFirstElementAtInputArr() {

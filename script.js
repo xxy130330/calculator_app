@@ -4,6 +4,7 @@ var flag = true;
 
 $(document).ready(initiateApp);
 
+
 function initiateApp() {
     $('.number').click(handleNumInput);
     $('.operator').click(handleOperatorInput);
@@ -14,33 +15,58 @@ function initiateApp() {
     handleAllInputConcat(inputElementArr);
 }
 
+
 function runCalculation(arr) {
     arr = arr.filter(Boolean);
     for (var i =0; i<arr.length; i++){
-        if(arr[i] == '*' || arr[i] == '/'){
-            if(arr[i] == '*'){
-                arr[i-1] = parseFloat(arr[i-1]) * parseFloat(arr[i+1]);
+        if(arr[i] == '*' || arr[i] == '/') {
+            if (!isNaN(arr[i + 1])) {
+                if (arr[i] == '*') {
+                    arr[i - 1] = parseFloat(arr[i - 1]) * parseFloat(arr[i + 1]);
+                } else {
+                    arr[i - 1] = parseFloat(arr[i - 1]) / parseFloat(arr[i + 1]);
+                }
+                arr.splice(i, 2);
+                i = i - 2;
             }else{
-                arr[i-1]=parseFloat(arr[i-1]) / parseFloat(arr[i+1]);
+                if (arr[i] == '*') {
+                    arr[i - 1] = parseFloat(arr[i - 1]) * parseFloat(arr[i - 1]);
+                } else {
+                    arr[i - 1] = parseFloat(arr[i - 1]) / parseFloat(arr[i - 1]);
+                }
+                arr.splice(i, 1);
+                i = i - 1;
             }
-            arr.splice(i, 2);
-            i=i-2;
         }
     }
     for (var i = 0; i<arr.length; i++){
         if(arr[i] == '+' || arr[i] == '-') {
-            if(arr[i] == '+'){
-                arr[i-1] = parseFloat(arr[i-1]) + parseFloat(arr[i+1]);
+            if (!isNaN(arr[i + 1])) {
+                if (arr[i] == '+') {
+                    arr[i - 1] = parseFloat(arr[i - 1]) + parseFloat(arr[i + 1]);
+                } else {
+                    arr[i - 1] = parseFloat(arr[i - 1]) - parseFloat(arr[i + 1]);
+                }
+                arr.splice(i, 2);
+                i = i - 2;
             }else{
-                arr[i-1]=parseFloat(arr[i-1]) - parseFloat(arr[i+1]);
+                if (arr[i] == '+') {
+                    arr[i - 1] = parseFloat(arr[i - 1]) + parseFloat(arr[i - 1]);
+                } else {
+                    arr[i - 1] = parseFloat(arr[i - 1]) - parseFloat(arr[i - 1]);
+                }
+                arr.splice(i, 1);
+                i = i - 1;
+
+
+                /////
             }
-            arr.splice(i, 2);
-            i=i-2;
         }
     }
     $('#result').append(arr[0]);
     return arr[0];
 }
+
 
 function handleAllInputConcat(arr) {
     for(var i=0; i<arr.length; i++){
@@ -79,12 +105,14 @@ function handleAllInputConcat(arr) {
     }
 }
 
+
 function handleNumInput() {
     var numInput = $(this).text();
     $('#expression').append(numInput);
     inputElementArr.push(numInput);
     handleAllInputConcat(inputElementArr);
 }
+
 
 function handleOperatorInput() {
     var opInput = $(this).text();
@@ -101,6 +129,7 @@ function handleOperatorInput() {
         }
     }
 }
+
 
 function handleDotInput() {
     var dot = $(this).text();
@@ -127,6 +156,7 @@ function handleEqualInput() {
     }
 }
 
+
 function multiEqual(arr) {
     var currentResult = $('#result').text();
     var newResultArr = [];
@@ -137,6 +167,7 @@ function multiEqual(arr) {
     $('#result').empty();
     return newResultArr;
 }
+
 
 function handleDeletePartial() {
     var dom = $('#expression').text();
@@ -151,6 +182,7 @@ function handleDeletePartial() {
     }
 }
 
+
 function deleteLastDigit(arr,domArr) {
     var arrLastElement = arr[arr.length - 1];
     arr.splice(arr.length - 1, 1);
@@ -163,6 +195,7 @@ function deleteLastDigit(arr,domArr) {
     $('#expression').append(tempStr);
 }
 
+
 function handleDeleteAll() {
     $('#expression').empty();
     $('#result').empty();
@@ -171,27 +204,9 @@ function handleDeleteAll() {
     flag = true;
 }
 
+
 function checkFirstElementAtInputArr() {
     if(inputElementArr[0] !== undefined){
         return true;
     }
 }
-// var cal = new calculator(newFunc)
-// var val =$(this).click()
-//
-//
-// function newFunc(type, value, item) {
-//         $('#displayArea').text(value);
-// }
-//
-// $(document).ready(initiateApp);
-// function initiateApp() {
-//     $('.number').click(handleNumInput);
-//     $('.operator').click(handleOperatorInput);
-//     $('.dot').click(handleDotInput);
-//     $('.equal').click(handleEqualInput);
-//     $('.delete').click(handleDeletePartial);
-//     $('.deleteEverything').click(handleDeleteAll);
-//     var val = $(this).text();
-//     handleAllInput(inputElementArr);
-// }

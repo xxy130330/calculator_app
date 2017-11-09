@@ -172,7 +172,8 @@ function multiEqualNotAtBeginning(arr) {
 function handleDeletePartial() {
     inputElementArr = inputElementArr.filter(Boolean);
     var dom = $('#expression').text();
-    if (inputElementArr.length === 1) {
+    var indexInlastArrElement = inputElementArr[inputElementArr.length-1].length;
+    if (indexInlastArrElement === 0) {
         handleDeleteAll();
     }
     else {
@@ -191,14 +192,14 @@ function handleDeletePartial() {
 
 function deleteLastDigit(arr,domArr) {
     var arrLastElement = arr[arr.length - 1];
-    arr.splice(arr.length - 1, 1);
-    var lastIndexOfLastElement = arrLastElement.length - 1;
-    var subStrOfArr = arrLastElement.substr(0, lastIndexOfLastElement);
-    arr.push(subStrOfArr);
-    var lastIndex = domArr.length - 1;
-    var tempStr = domArr.substr(0, lastIndex);
-    $('#expression').empty();
-    $('#expression').append(tempStr);
+        arr.splice(arr.length - 1, 1);
+        var lastIndexOfLastElement = arrLastElement.length - 1;
+        var subStrOfArr = arrLastElement.substr(0, lastIndexOfLastElement);
+        arr.push(subStrOfArr);
+        var lastIndex = domArr.length - 1;
+        var tempStr = domArr.substr(0, lastIndex);
+        $('#expression').empty();
+        $('#expression').append(tempStr);
 }
 
 

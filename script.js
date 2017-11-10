@@ -18,6 +18,7 @@ function initiateApp() {
 
 function runCalculation(arr) {
     arr = arr.filter(Boolean);
+    $('#result').empty();
     for (var i =0; i<arr.length; i++){
         if(arr[i] == '*' || arr[i] == '/') {
             if (!isNaN(arr[i + 1])) {
@@ -57,14 +58,11 @@ function runCalculation(arr) {
                 }
                 arr.splice(i, 1);
                 i = i - 1;
-
-
-                /////
             }
         }
     }
     $('#result').append(arr[0]);
-    return arr[0];
+    return arr;
 }
 
 
@@ -117,6 +115,7 @@ function handleNumInput() {
 function handleOperatorInput() {
     var opInput = $(this).text();
     $('#expression').append(opInput);
+    equalCounter = 0;
     if(checkFirstElementAtInputArr() || opInput === "-") {
         var temp = inputElementArr[inputElementArr.length-1];
         if(!isNaN(temp)){
@@ -125,7 +124,7 @@ function handleOperatorInput() {
         }else{
             inputElementArr.splice(inputElementArr.length-1, 1);
             inputElementArr.push(opInput);
-            handleAllInputConcat(inputElementArr);
+            inputElementArr = handleAllInputConcat(inputElementArr);
         }
     }
 }
@@ -146,14 +145,18 @@ function handleDotInput() {
 function handleEqualInput() {
     var equal = $(this).text();
     $('#expression').append(equal);
+    if(inputElementArr.length === 0){
+        $('#result').text('Ready To Go!');
+    }
     if (flag) {
         if (equalCounter !== 0) {
             runCalculation(multiEqualNotAtBeginning(inputElementArr));
         } else if (checkFirstElementAtInputArr()) {
-            runCalculation(inputElementArr);
+            inputElementArr = runCalculation(inputElementArr);
             equalCounter++;
         }
     }
+
 }
 
 

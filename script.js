@@ -17,7 +17,7 @@ function initiateApp() {
 
 
 function runCalculation(arr) {
-    arr = arr.filter(Boolean);
+    // arr = arr.filter(Boolean);
     $('#result').empty();
     for (var i =0; i<arr.length; i++){
         if(arr[i] == '*' || arr[i] == '/') {

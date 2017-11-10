@@ -67,6 +67,10 @@ function runCalculation(arr) {
 
 
 function handleAllInputConcat(arr) {
+    if(arr[0] === '-'){
+        arr[0] = arr[0]+arr[1];
+        arr.splice(1,1);
+    }
     for(var i=0; i<arr.length; i++){
         if(!isNaN(arr[i]) && !isNaN(arr[i+1]) && arr[i] !== '.' && arr[i+1] !== '.'){
             arr[i] = '' + arr[i] + arr[i+1];
@@ -117,14 +121,18 @@ function handleOperatorInput() {
     $('#expression').append(opInput);
     equalCounter = 0;
     if(checkFirstElementAtInputArr() || opInput === "-") {
-        var temp = inputElementArr[inputElementArr.length-1];
-        if(!isNaN(temp)){
+        if (opInput === '-') {
             inputElementArr.push(opInput);
-            handleAllInputConcat(inputElementArr);
-        }else{
-            inputElementArr.splice(inputElementArr.length-1, 1);
-            inputElementArr.push(opInput);
-            inputElementArr = handleAllInputConcat(inputElementArr);
+        } else {
+            var temp = inputElementArr[inputElementArr.length - 1];
+            if (!isNaN(temp)) {
+                inputElementArr.push(opInput);
+                handleAllInputConcat(inputElementArr);
+            } else {
+                inputElementArr.splice(inputElementArr.length - 1, 1);
+                inputElementArr.push(opInput);
+                inputElementArr = handleAllInputConcat(inputElementArr);
+            }
         }
     }
 }

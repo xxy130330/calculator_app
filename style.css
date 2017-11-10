@@ -1,7 +1,8 @@
 body{
+    height:100vh;
     background-image: url("images/study-bg-img.jpg");
     background-repeat:no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
 
 html{

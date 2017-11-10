@@ -62,7 +62,9 @@ function runCalculation(arr) {
             }
         }
     }
-    $('#result').append(arr[0]);
+    if(arr[0].length < 25) {
+        $('#result').append(arr[0]);
+    }else{$('#result').append('ERROR!!!')};
     return arr;
 }
 

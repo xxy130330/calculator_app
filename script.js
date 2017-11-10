@@ -1,6 +1,7 @@
 var inputElementArr = [];
 var equalCounter = 0;
 var flag = true;
+var expressionLengthCounter = 0;
 
 $(document).ready(initiateApp);
 
@@ -15,7 +16,7 @@ function initiateApp() {
     handleAllInputConcat(inputElementArr);
 }
 
-
+//triggered by function handleEqualInput
 function runCalculation(arr) {
     // arr = arr.filter(Boolean);
     $('#result').empty();
@@ -65,7 +66,7 @@ function runCalculation(arr) {
     return arr;
 }
 
-
+//Concatenate all input before it's pushed into array
 function handleAllInputConcat(arr) {
     if(arr[0] === '-'){
         arr[0] = arr[0]+arr[1];
@@ -110,28 +111,34 @@ function handleAllInputConcat(arr) {
 
 function handleNumInput() {
     var numInput = $(this).text();
-    $('#expression').append(numInput);
-    inputElementArr.push(numInput);
-    handleAllInputConcat(inputElementArr);
+    if(expressionLengthCounter < 25) {
+        $('#expression').append(numInput);
+        expressionLengthCounter++;
+        inputElementArr.push(numInput);
+        handleAllInputConcat(inputElementArr);
+    }
 }
 
 
 function handleOperatorInput() {
     var opInput = $(this).text();
-    $('#expression').append(opInput);
-    equalCounter = 0;
-    if(checkFirstElementAtInputArr() || opInput === "-") {
-        if (opInput === '-') {
-            inputElementArr.push(opInput);
-        } else {
-            var temp = inputElementArr[inputElementArr.length - 1];
-            if (!isNaN(temp)) {
+    if(expressionLengthCounter < 20) {
+        $('#expression').append(opInput);
+        expressionLengthCounter++;
+        equalCounter = 0;
+        if (checkFirstElementAtInputArr() || opInput === "-") {
+            if (opInput === '-') {
                 inputElementArr.push(opInput);
-                handleAllInputConcat(inputElementArr);
             } else {
-                inputElementArr.splice(inputElementArr.length - 1, 1);
-                inputElementArr.push(opInput);
-                inputElementArr = handleAllInputConcat(inputElementArr);
+                var temp = inputElementArr[inputElementArr.length - 1];
+                if (!isNaN(temp)) {
+                    inputElementArr.push(opInput);
+                    handleAllInputConcat(inputElementArr);
+                } else {
+                    inputElementArr.splice(inputElementArr.length - 1, 1);
+                    inputElementArr.push(opInput);
+                    inputElementArr = handleAllInputConcat(inputElementArr);
+                }
             }
         }
     }
@@ -140,31 +147,35 @@ function handleOperatorInput() {
 
 function handleDotInput() {
     var dot = $(this).text();
-    $('#expression').append(dot);
-     var lastElement = inputElementArr[inputElementArr.length - 1];
-     var lastCharOfLastElement = lastElement[lastElement.length-1];
-    if (lastCharOfLastElement !== '.'){
-    inputElementArr.push(dot);
-    handleAllInputConcat(inputElementArr);
+    if(expressionLengthCounter < 20) {
+        $('#expression').append(dot);
+        expressionLengthCounter++;
+        var lastElement = inputElementArr[inputElementArr.length - 1];
+        var lastCharOfLastElement = lastElement[lastElement.length - 1];
+        if (lastCharOfLastElement !== '.') {
+            inputElementArr.push(dot);
+            handleAllInputConcat(inputElementArr);
+        }
     }
 }
 
 
 function handleEqualInput() {
     var equal = $(this).text();
-    $('#expression').append(equal);
-    if(inputElementArr.length === 0){
-        $('#result').text('Ready To Go!');
-    }
-    if (flag) {
-        if (equalCounter !== 0) {
-            runCalculation(multiEqualNotAtBeginning(inputElementArr));
-        } else if (checkFirstElementAtInputArr()) {
-            inputElementArr = runCalculation(inputElementArr);
-            equalCounter++;
+    if(inputElementArr.length < 20) {
+        $('#expression').append(equal);
+        if (inputElementArr.length === 0) {
+            $('#result').text('Ready To Go!');
+        }
+        if (flag) {
+            if (equalCounter !== 0) {
+                runCalculation(multiEqualNotAtBeginning(inputElementArr));
+            } else if (checkFirstElementAtInputArr()) {
+                inputElementArr = runCalculation(inputElementArr);
+                equalCounter++;
+            }
         }
     }
-
 }
 
 
@@ -182,6 +193,7 @@ function multiEqualNotAtBeginning(arr) {
 
 function handleDeletePartial() {
     inputElementArr = inputElementArr.filter(Boolean);
+    expressionLengthCounter--;
     var dom = $('#expression').text();
     var indexInlastArrElement = inputElementArr[inputElementArr.length-1].length;
     if (indexInlastArrElement === 0) {
@@ -220,6 +232,7 @@ function handleDeleteAll() {
     inputElementArr=[];
     equalCounter = 0;
     flag = true;
+    expressionLengthCounter=0;
 }
 
 

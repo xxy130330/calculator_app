@@ -1,3 +1,9 @@
+body{
+    background-image: url("images/study-bg-img.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
 html{
     font-size: 1.5vmin;
 }

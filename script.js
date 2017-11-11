@@ -196,23 +196,27 @@ function multiEqualNotAtBeginning(arr) {
 
 
 function handleDeletePartial() {
-    inputElementArr = inputElementArr.filter(Boolean);
+    // inputElementArr = inputElementArr.filter(Boolean);
     expressionLengthCounter--;
     var dom = $('#expression').text();
-    var indexInlastArrElement = inputElementArr[inputElementArr.length-1].length;
-    if (indexInlastArrElement === 0) {
-        handleDeleteAll();
-    }
-    else {
-        if (dom[dom.length - 1] !== '%') {
-            deleteLastDigit(inputElementArr, dom);
-        } else {
-            var arrLastElement = inputElementArr[inputElementArr.length - 1];
-            inputElementArr.splice(inputElementArr.length - 1, 1);
-            var percentageNum = arrLastElement * 100 + '%';
-            inputElementArr.push(percentageNum);
-            deleteLastDigit(inputElementArr, dom);
+    if(inputElementArr.length-1 >= 0) {
+        var indexInLastArrElement = inputElementArr[inputElementArr.length - 1].length;
+        if (indexInLastArrElement === 0) {
+            handleDeleteAll();
         }
+        else {
+            if (dom[dom.length - 1] !== '%') {
+                deleteLastDigit(inputElementArr, dom);
+            } else {
+                var arrLastElement = inputElementArr[inputElementArr.length - 1];
+                inputElementArr.splice(inputElementArr.length - 1, 1);
+                var percentageNum = arrLastElement * 100 + '%';
+                inputElementArr.push(percentageNum);
+                deleteLastDigit(inputElementArr, dom);
+            }
+        }
+    }else{
+        handleDeleteAll();
     }
 }
 

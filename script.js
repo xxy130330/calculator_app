@@ -1,7 +1,9 @@
 var inputElementArr = [];
+var tempArr = [];
 var equalCounter = 0;
 var flag = true;
 var expressionLengthCounter = 0;
+var tempArrFlag = true;
 
 $(document).ready(initiateApp);
 
@@ -141,7 +143,7 @@ function handleOperatorInput() {
                 } else {
                     inputElementArr.splice(inputElementArr.length - 1, 1);
                     inputElementArr.push(opInput);
-                    inputElementArr = handleAllInputConcat(inputElementArr);
+                    // inputElementArr = handleAllInputConcat(inputElementArr);
                 }
             }
         }
@@ -165,6 +167,10 @@ function handleDotInput() {
 
 
 function handleEqualInput() {
+    if(tempArrFlag) {
+        tempArr = inputElementArr.slice();
+        tempArrFlag = false;
+    }
     var equal = $(this).text();
     if(inputElementArr.length < 20) {
         $('#expression').append(equal);
@@ -173,7 +179,7 @@ function handleEqualInput() {
         }
         if (flag) {
             if (equalCounter !== 0) {
-                runCalculation(multiEqualNotAtBeginning(inputElementArr));
+                runCalculation(multiEqualNotAtBeginning(tempArr));
             } else if (checkFirstElementAtInputArr()) {
                 inputElementArr = runCalculation(inputElementArr);
                 equalCounter++;
@@ -241,6 +247,8 @@ function handleDeleteAll() {
     equalCounter = 0;
     flag = true;
     expressionLengthCounter=0;
+    tempArr = [];
+    tempArrFlag = true;
 }
 
 

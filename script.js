@@ -7,7 +7,6 @@ var tempArrFlag = true;
 
 $(document).ready(initiateApp);
 
-
 function initiateApp() {
     $('.number').click(handleNumInput);
     $('.operator').click(handleOperatorInput);

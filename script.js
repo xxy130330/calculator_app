@@ -19,7 +19,6 @@ function initiateApp() {
 
 //triggered by function handleEqualInput
 function runCalculation(arr) {
-    // arr = arr.filter(Boolean);
     $('#result').empty();
     for (var i =0; i<arr.length; i++){
         if(arr[i] == '*' || arr[i] == '/') {
@@ -94,8 +93,8 @@ function handleAllInputConcat(arr) {
             }
         }else {
             if (!isNaN(arr[dotLocation+1]) || arr[dotLocation+1] !==undefined) {
-                arr[dotLocation] = '' + arr[dotLocation] + arr[dotLocation + 1];
-                arr.splice(dotLocation + 1, 1);
+                arr[dotLocation] = 0 + arr[dotLocation] + arr[dotLocation + 1];
+                // arr.splice(dotLocation + 1, 1);
             }
         }
     }
@@ -155,11 +154,16 @@ function handleDotInput() {
     if(expressionLengthCounter < 20) {
         $('#expression').append(dot);
         expressionLengthCounter++;
-        var lastElement = inputElementArr[inputElementArr.length - 1];
-        var lastCharOfLastElement = lastElement[lastElement.length - 1];
-        if (lastCharOfLastElement !== '.') {
+        if(inputElementArr.length === 0){
             inputElementArr.push(dot);
             handleAllInputConcat(inputElementArr);
+        }else {
+            var lastElement = inputElementArr[inputElementArr.length - 1];
+            var lastCharOfLastElement = lastElement[lastElement.length - 1];
+            if (lastCharOfLastElement !== '.') {
+                inputElementArr.push(dot);
+                handleAllInputConcat(inputElementArr);
+            }
         }
     }
 }

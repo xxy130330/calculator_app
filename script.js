@@ -19,6 +19,7 @@ function initiateApp() {
 
 //triggered by function handleEqualInput
 function runCalculation(arr) {
+    var finalResult;
     $('#result').empty();
     for (var i =0; i<arr.length; i++){
         if(arr[i] == '*' || arr[i] == '/') {
@@ -63,9 +64,10 @@ function runCalculation(arr) {
         }
     }
     if((''+arr[0]).length < 25) {
-        $('#result').append(arr[0]);
+        finalResult = arr[0].toPrecision(5);
+        $('#result').append(finalResult);
     }else if((''+arr[0]).length > 25){
-        $('#result').append('ERROR!!!')
+        $('#result').append('ERROR!!!');
     };
     return arr;
 }
@@ -93,7 +95,7 @@ function handleAllInputConcat(arr) {
                 arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation] + arr[dotLocation + 1];
                 arr.splice(dotLocation, 2);
             }
-            
+
             // }else {
             //     arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
             //     arr.splice(dotLocation, 1);

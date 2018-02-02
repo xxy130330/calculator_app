@@ -94,7 +94,7 @@ function handleAllInputConcat(arr) {
         }else {
             if (!isNaN(arr[dotLocation+1]) || arr[dotLocation+1] !==undefined) {
                 arr[dotLocation] = 0 + arr[dotLocation] + arr[dotLocation + 1];
-                // arr.splice(dotLocation + 1, 1);
+                arr.splice(dotLocation + 1, 1);
             }
         }
     }

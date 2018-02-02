@@ -89,7 +89,11 @@ function handleAllInputConcat(arr) {
             if(isNaN(arr[dotLocation - 1]) && !isNaN(arr[dotLocation + 1])) {
                 arr[dotLocation] = 0 + arr[dotLocation] + arr[dotLocation + 1];
                 arr.splice(dotLocation + 1, 1);
+            }else if(!isNaN(arr[dotLocation - 1]) && !isNaN(arr[dotLocation + 1])){
+                arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation] + arr[dotLocation + 1];
+                arr.splice(dotLocation, 2);
             }
+            
             // }else {
             //     arr[dotLocation - 1] = '' + arr[dotLocation - 1] + arr[dotLocation];
             //     arr.splice(dotLocation, 1);

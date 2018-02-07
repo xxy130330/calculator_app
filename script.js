@@ -63,14 +63,14 @@ function runCalculation(arr) {
         }
     }
     if((''+arr[0]).length < 25) {
-        $('#result').append(inputElementArr);
+        $('#result').append(arr[0]);
     }else if((''+arr[0]).length > 25){
         $('#result').append('ERROR!!!');
     };
     return arr;
 }
 
-//Concatenate all input before it's pushed into array
+// Concatenate all input before it's pushed into array
 function handleAllInputConcat(arr) {
     if(arr[0] === '-'){
         arr[0] = arr[0]+arr[1];

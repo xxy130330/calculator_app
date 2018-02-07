@@ -64,7 +64,7 @@ function runCalculation(arr) {
     }
     if((''+arr[0]).length < 25) {
         $('#result').append(arr[0]);
-    }else if((''+arr[0]).length > 25){
+    }else if((''+arr[0]).length >= 25){
         $('#result').append('ERROR!!!');
     };
     return arr;
@@ -186,7 +186,7 @@ function handleEqualInput() {
     }
     var equal = $(this).text();
     if(inputElementArr.length < 20) {
-        $('#expression').append(equal);
+        $('#expression').append(equal, $('<br>'));
         if (inputElementArr.length === 0) {
             $('#result').text('Ready To Go!');
         }

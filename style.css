@@ -22,6 +22,8 @@ html{
 #displayArea{
     width: 100%;
     height: 30%;
+    position: relative;
+    overflow-y: auto;
 }
 
 .container{
@@ -71,10 +73,13 @@ html{
     border-bottom:1px solid brown;
     background-color: wheat;
     width: 100%;
-    height:68%;
+    min-height:68%;
     color: black;
     font-size: 3vh;
     text-align: right;
+    position: absolute;
+    bottom: 32%;
+    overflow-wrap: break-word;
 }
 
 #result{
@@ -84,6 +89,8 @@ html{
     height:32%;
     text-align: right;
     font-size: 3vh;
+    position: absolute;
+    bottom: 0;
 }
 
 
